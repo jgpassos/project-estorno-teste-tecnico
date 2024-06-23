@@ -34,6 +34,9 @@ jobs:
     - name: Run tests
       run: mvn test --file pom.xml
 
+    - name: Run verify
+      run: mvn verify --file pom.xml
+
     - name: Generate Jacoco Report
       run: mvn jacoco:report
 
@@ -42,13 +45,3 @@ jobs:
       with:
           name: jacoco-report
           path: target/site/jacoco/index.html
-
-    - name: Coveralls GitHub Action
-      uses: coverallsapp/github-action@v2.3.0
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Send coverage to Coveralls
-      run: mvn coveralls:report
-      env:
-          REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
