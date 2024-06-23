@@ -1,4 +1,4 @@
-# Teste técnico de normalização de arquivo de pedidos
+# Teste técnico normalização de arquivo de pedidos
 
 
 Este projeto tem como objetivo transformar um arquivo de pedidos desnormalizado em um arquivo JSON normalizado. O programa utiliza Java e Maven para a construção e segue os padrões SOLID. Abaixo estão os detalhes sobre a estrutura do projeto, como utilizá-lo e as ferramentas empregadas.
