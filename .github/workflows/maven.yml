@@ -33,3 +33,12 @@ jobs:
 
     - name: Run tests
       run: mvn -B test --file pom.xml
+
+    - name: Generate Jacoco Report
+      run: mvn jacoco:report
+
+    - name: Upload Jacoco Report
+      uses: actions/upload-artifact@v2
+      with:
+        name: jacoco-report
+        path: target/site/jacoco/index.html
