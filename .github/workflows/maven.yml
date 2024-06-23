@@ -45,6 +45,8 @@ jobs:
 
     - name: Coveralls GitHub Action
       uses: coverallsapp/github-action@v2.3.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Send coverage to Coveralls
       run: mvn coveralls:report
