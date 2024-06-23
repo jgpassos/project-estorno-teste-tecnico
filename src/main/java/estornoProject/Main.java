@@ -1,5 +1,6 @@
 package estornoProject;
 
+import estornoProject.interfaces.FileWriter;
 import estornoProject.interfaces.JsonConverter;
 import estornoProject.imps.JsonConverterImp;
 import estornoProject.model.User;
@@ -7,6 +8,8 @@ import estornoProject.interfaces.FileChooser;
 import estornoProject.imps.FileChooserImp;
 import estornoProject.repository.FileDataReader;
 import estornoProject.interfaces.FileReader;
+import estornoProject.repository.FileDataWriter;
+
 import java.util.List;
 
 public class Main {
@@ -19,6 +22,8 @@ public class Main {
 
         JsonConverter converter = new JsonConverterImp();
         String json = converter.jsonConverter(users);
-        System.out.println(json);
+
+        FileWriter fileWriter = new FileDataWriter();
+        fileWriter.writeFile(json, "data.json");
     }
 }
