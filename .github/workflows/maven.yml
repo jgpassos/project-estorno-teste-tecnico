@@ -42,3 +42,6 @@ jobs:
       with:
           name: jacoco-report
           path: target/site/jacoco/index.html
+
+    - name: Coveralls GitHub Action
+      uses: coverallsapp/github-action@v2.3.0
