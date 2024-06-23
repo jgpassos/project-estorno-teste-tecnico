@@ -40,10 +40,33 @@ jobs:
     - name: Upload Jacoco Report
       uses: actions/upload-artifact@v2
       with:
-        name: jacoco-report
-        paths: |
-          ${{ github.workspace }}/**/build/reports/jacoco/prodNormalDebugCoverage/prodNormalDebugCoverage.xml,
-          ${{ github.workspace }}/**/build/reports/jacoco/**/debugCoverage.xml
-          token: ${{ secrets.GITHUB_TOKEN }}
-          min-coverage-overall: 40
-          min-coverage-changed-files: 60
+        with:
+        name: code-coverage-report
+        path: |
+              ${{ github.workspace }}/**/build/reports/jacoco/test/html/*
+              ${{ github.workspace }}/**/target/site/jacoco/*
+              - name: Add Code Coverage to PR
+                id: jacoco
+                uses: madrapps/jacoco-report@1.6.1
+                with:
+                  paths: |
+                    ${{ github.workspace }}/**/build/reports/jacoco/test/jacocoTestReport.xml
+                    ${{ github.workspace }}/**/target/site/jacoco/jacoco.xml
+                  token: ${{ secrets.GITHUB_TOKEN }}
+                  title: Code Coverage
+                  min-coverage-overall: ${{ inputs.overall-coverage-value }}
+                  min-coverage-changed-files: ${{ inputs.changed-files-coverage-value }}
+                  pass-emoji: ':green_circle:'
+                  fail-emoji: ':red_circle:'
+              - name: Fail PR if overall coverage is less than ${{ inputs.overall-coverage-value }}%
+                if: ${{ inputs.overall-coverage-flag && steps.jacoco.outputs.coverage-overall < inputs.overall-coverage-value }}
+                uses: actions/github-script@v7.0.1
+                with:
+                  script: |
+                    core.setFailed('Overall coverage is less than ${{ inputs.overall-coverage-value }}%!')
+              - name: Fail PR if changed files coverage is less than ${{ inputs.changed-files-coverage-value }}%
+                if: ${{ steps.jacoco.outputs.coverage-changed-files < inputs.changed-files-coverage-value }}
+                uses: actions/github-script@v7.0.1
+                with:
+                  script: |
+                    core.setFailed('Changed files coverage is less than ${{ inputs.changed-files-coverage-value }}%!')
