@@ -63,7 +63,7 @@ Os dados lidos do arquivo são normalizados e convertidos para uma estrutura JSO
 
 A pasta `target` contém o relatório de cobertura de testes gerado pelo Jacoco, onde `index.html` mostra a porcentagem de cobertura de todas as classes.
 
-`![COVERAGE com Jacoco](![coverage](src/resources/coverage.png)`
+![COVERAGE com Jacoco](src/main/resources/coverage.png)
 
 O projeto utiliza GitHub Actions para automatizar o processo de build. O workflow definido em `.github/workflows/maven.yml` realiza os seguintes passos:
 
