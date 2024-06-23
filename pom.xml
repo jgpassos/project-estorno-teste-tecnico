@@ -51,16 +51,37 @@
                 <version>0.8.8</version>
                 <executions>
                     <execution>
+                        <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                     <execution>
-                        <id>report</id>
-                        <phase>test</phase>
+                        <id>generate-report</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
+                    </execution>
+                    <execution>
+                        <id>check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>PACKAGE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>0.70</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -69,7 +90,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
                 <configuration>
-                    <repoToken>secrets.COVERALLS_REPO_TOKEN</repoToken>
+                    <repoToken>COVERALLS_REPO_TOKEN</repoToken>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -80,40 +101,11 @@
                 </dependencies>
                 <executions>
                     <execution>
-                        <phase>post-integration-test</phase>
+                        <id>coveralls-report</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <format>xml</format>
-                    <maxmem>256m</maxmem>
-                    <!-- aggregated reports for multi-module projects -->
-                    <aggregate>true</aggregate>
-                    <check/>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.github.timurstrekalov</groupId>
-                <artifactId>saga-maven-plugin</artifactId>
-                <version>1.5.5</version>
-                <executions>
-                    <execution>
-                        <id>integration-test-coverage</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>coverage</goal>
-                        </goals>
-                        <configuration>
-                            <baseDir>${project.build.directory}/classes</baseDir>
-                            <outputDir>${project.build.directory}/saga-reports</outputDir>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
