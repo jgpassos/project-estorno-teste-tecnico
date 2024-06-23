@@ -71,6 +71,13 @@
                 <configuration>
                     <repoToken>COVERALLS_REPO_TOKEN</repoToken>
                 </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>2.3.1</version>
+                    </dependency>
+                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
@@ -90,9 +97,15 @@
                 <version>1.5.5</version>
                 <executions>
                     <execution>
+                        <id>integration-test-coverage</id>
+                        <phase>verify</phase>
                         <goals>
                             <goal>coverage</goal>
                         </goals>
+                        <configuration>
+                            <baseDir>${project.build.directory}/classes</baseDir>
+                            <outputDir>${project.build.directory}/saga-reports</outputDir>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
