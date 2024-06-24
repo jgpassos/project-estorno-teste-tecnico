@@ -72,11 +72,11 @@ O projeto utiliza GitHub Actions para automatizar o processo de build. O workflo
 3. Executa os comandos do Maven para construir o projeto e rodar os testes.
 4. Executa os comandos do Jacoco para a construção dos relatórios de coverage.
 
-###JaCoCo
+### JaCoCo
   - JaCoCo (Java Code Coverage) é uma ferramenta de análise de cobertura de código para aplicações Java. Ele monitora a execução de testes e gera relatórios detalhados sobre quais partes do código foram executadas durante os testes. Esses relatórios ajudam os desenvolvedores a identificar partes do código que não estão sendo testadas, permitindo melhorar a cobertura de testes e, consequentemente, a qualidade do software.
 
-###Maven
+### Maven
   - Maven é uma ferramenta de automação de compilação e gerenciamento de projetos. Ele usa um arquivo de configuração chamado pom.xml (Project Object Model) para gerenciar dependências, compilar o código, executar testes e gerar pacotes distribuíveis. 
 
-###JUnit
+### JUnit
   - JUnit é uma framework de teste. Ele é amplamente utilizado para escrever e executar testes automatizados, ajudando a verificar se o código está funcionando conforme o esperado. JUnit permite a criação de testes unitários, onde pequenos pedaços de código são testados de forma isolada. Ele fornece anotações como @Test para indicar métodos de teste e várias assertivas para verificar os resultados esperados.
